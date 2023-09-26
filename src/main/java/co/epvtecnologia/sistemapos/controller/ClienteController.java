@@ -22,35 +22,37 @@ import java.util.List;
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
+
     @GetMapping
-    public String lista(final Model model){
+    public String lista(final Model model) {
         List<ClienteDTO> listaClientes = clienteService.findAll();
-        model.addAttribute("listaClientes",listaClientes);
+        model.addAttribute("listaClientes", listaClientes);
         return "cliente/list";
     }
+
     @GetMapping("/add")
-    public String registrarCliente(@ModelAttribute("cliente") ClienteDTO cliente){
+    public String registrarCliente(@ModelAttribute("cliente") ClienteDTO cliente) {
 
         return "cliente/add";
     }
 
     @PostMapping("/add")
-    public String registrarCliente(@ModelAttribute("cliente") @Valid ClienteDTO cliente, final BindingResult bindingResult, final RedirectAttributes redirectAttributes){
+    public String registrarCliente(@ModelAttribute("cliente") @Valid ClienteDTO cliente, final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
 
+
+        if (!bindingResult.hasFieldErrors("numDocumento") && clienteService.numeroDocumentoExists(cliente.getNumDocumento())) {
+            bindingResult.rejectValue("numDocumento", "10000");
+        }
 
         if (bindingResult.hasErrors()) {
             return "cliente/add";
         }
 
 
-
-            clienteService.guardar(cliente);
-
+        clienteService.guardar(cliente);
 
 
-
-
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS,"Cliente Creado");
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_SUCCESS, "Cliente Creado");
         return "redirect:/clientes";
     }
 
@@ -64,7 +66,11 @@ public class ClienteController {
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable final Long id,
                        @ModelAttribute("cliente") @Valid final ClienteDTO clienteDTO,
-                       final BindingResult bindingResult, final RedirectAttributes redirectAttributes){
+                       final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
+
+        if (!bindingResult.hasFieldErrors("numDocumento") && clienteService.numeroDocumentoExists(clienteDTO.getNumDocumento())) {
+            bindingResult.rejectValue("numDocumento", "10000");
+        }
 
 
         if (bindingResult.hasErrors()) {
@@ -77,6 +83,12 @@ public class ClienteController {
 
     }
 
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable final Long id, final RedirectAttributes redirectAttributes) {
+        clienteService.delete(id);
+        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("producto.delete.success"));
+        return "redirect:/clientes";
+    }
 
 
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface ClienteRepository extends JpaRepository<Cliente,Long> {
 
        public Cliente findByIdCliente(Long id);
+       public boolean existsClienteByNumDocumento(String numDocumento);
 }

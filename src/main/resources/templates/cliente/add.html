@@ -11,7 +11,7 @@
         <h1>Registrar Clientes en el sistema</h1>
         <a th:href="@{/clientes}" class="btn" style="background-color: indigo; color: aliceblue">Listado</a>
     </div>
-
+    <div th:replace="~{fragments/forms::globalErrors('cliente')}" />
     <form th:action="@{/clientes/add}" method="post" th:object="${cliente}">
         <div class="row m-2">
             <label class="col-sm-3 col-form-label" for="tipo-documento">Tipo de documento:</label>

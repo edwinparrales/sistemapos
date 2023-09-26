@@ -79,5 +79,13 @@ public class ClienteService {
 
     }
 
+    public boolean numeroDocumentoExists(final String numeroDocumento) {
+        return clienteRepository.existsClienteByNumDocumento(numeroDocumento);
+    }
+
+    public void delete(final Long id){
+        clienteRepository.deleteById(id);
+    }
+
 
 }

@@ -11,7 +11,7 @@ function addEvent(eventType, selector, handler) {
 }
 
 addEvent('submit', '.js-submit-confirm', function(event) {
-    if (!confirm(this.getAttribute('data-confirm-message'))) {
+    if (!confirm(this.getAttribute('data-confirm-messaeg'))) {
         event.preventDefault();
         return false;
     }

@@ -36,7 +36,14 @@
 
 
                 <a class="btn btn-success" th:href="@{/clientes/edit/{id}(id=${cliente.idCliente})}"> Editar</a>
-                <a class="btn btn-danger"> Eliminar</a>
+
+
+                <form th:action="@{/clientes/delete/{id}(id=${cliente.idCliente})}"
+                      th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                    <button type="submit" class="btn btn-sm btn-secondary">Eliminar</button>
+                </form>
+
+
             </td>
 
         </tr>
