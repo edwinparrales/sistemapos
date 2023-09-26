@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar nuevo cliente</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div>
+        <h1>Registrar Clientes en el sistema</h1>
+        <a th:href="@{/clientes}" class="btn" style="background-color: indigo; color: aliceblue">Listado</a>
+    </div>
+
+    <form th:action="@{/clientes/add}" method="post" th:object="${cliente}">
+        <div class="row m-2">
+            <label class="col-sm-3 col-form-label" for="tipo-documento">Tipo de documento:</label>
+            <div class="col-md-6">
+                <select name="tipo-documento" id="tipo-documento" th:field="*{tipoDocumento}">
+                    <option value="CC">Cedula</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                    <option value="NIT">Nit</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <label class="col-sm-3 col-form-label" for="documento">Numero de documento:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="documento" id="documento" th:field="*{numDocumento}">
+                <div th:if="${#fields.hasErrors('numDocumento') || #fields.hasErrors('numDocumento' + '.*')}" class="invalid-feedback d-block">
+                    <p th:each="fieldError : ${#fields.detailedErrors('numDocumento' + '*')}"
+                       th:text="${(fieldError.fieldName != field ? fieldError.fieldName + ': ' : '') + fieldError.message}" class="mb-0" />
+                </div>
+
+            </div>
+        </div>
+        <div class="row m-2">
+            <label class="col-sm-3 col-form-label" for="nombres">Nombres:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="nombres" id="nombres"  th:field="*{nombres}">
+                <div th:if="${#fields.hasErrors('nombres') || #fields.hasErrors('nombres' + '.*')}" class="invalid-feedback d-block">
+                    <p th:each="fieldError : ${#fields.detailedErrors('nombres' + '*')}"
+                       th:text="${(fieldError.fieldName != field ? fieldError.fieldName + ': ' : '') + fieldError.message}" class="mb-0" />
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row m-2">
+            <label class="col-sm-3 col-form-label" for="telefono">Numero telefonico:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="telefono" id="telefono" th:field="*{telefono}" >
+                <div th:if="${#fields.hasErrors('telefono') || #fields.hasErrors('telefono' + '.*')}" class="invalid-feedback d-block">
+                    <p th:each="fieldError : ${#fields.detailedErrors('telefono' + '*')}"
+                       th:text="${(fieldError.fieldName != field ? fieldError.fieldName + ': ' : '') + fieldError.message}" class="mb-0" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <label class="col-sm-3 col-form-label" for="direccion">Direccion:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="direccion" id="direccion" th:field="*{direccion}">
+                <div th:if="${#fields.hasErrors('direccion') || #fields.hasErrors('direccion' + '.*')}" class="invalid-feedback d-block">
+                    <p th:each="fieldError : ${#fields.detailedErrors('direccion' + '*')}"
+                       th:text="${(fieldError.fieldName != field ? fieldError.fieldName + ': ' : '') + fieldError.message}" class="mb-0" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <label class="col-sm-3 col-form-label" for="email">Email:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="email" name="email" id="email" th:field="*{email}">
+            </div>
+        </div>
+
+
+
+       <div class="row m-2">
+           <div class="col-md-3">
+               <button type="submit" class="btn btn-success">Guardar</button>
+           </div>
+
+       </div>
+
+
+    </form>
+
+</div>
+
+</body>
+</html>
