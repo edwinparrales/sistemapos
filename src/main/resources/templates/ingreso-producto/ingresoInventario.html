@@ -16,27 +16,27 @@
     <div class="container m-2">
 
 
-        <form action="" method="post">
+        <form  th:action="@{/ingreso-productos/add}" method="post" th:object="${ingresoProductoDTO}">
             <div class="d-flex flex-row m-2">
 
                 <div>
                     <label for="fecha">Fecha</label>
-                    <input type="date" name="fecha" id="fecha">
+                    <input type="date" name="fecha" id="fecha" th:field="*{fecha}">
                 </div>
                 <div>
                     <label for="codigoFactura">Codigo Factura:</label>
-                    <input type="text" name="codigoFactura" id="codigoFactura">
+                    <input type="text" name="codigoFactura" id="codigoFactura" th:field="*{codFactura}">
                 </div>
                 <div>
 
                     <label for="nombreProveedor">Nombre del proveedor:</label>
-                    <input type="text" name="nombreProveedor" id="nombreProveedor">
+                    <input type="text" name="nombreProveedor" id="nombreProveedor" th:field="*{nombreProveedor}">
 
                 </div>
 
             </div>
 
-            <button>Registrar</button>
+            <button class="btn btn-success" type="submit">Registrar</button>
 
 
         </form>

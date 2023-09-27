@@ -75,4 +75,12 @@ public class IngresoProductoDTO {
     public void setDetalleIngresoProductoDTO(DetalleIngresoProductoDTO detalleIngresoProductoDTO) {
         this.detalleIngresoProductoDTO = detalleIngresoProductoDTO;
     }
+
+    public ProductoDTO getProductoDTO() {
+        return productoDTO;
+    }
+
+    public void setProductoDTO(ProductoDTO productoDTO) {
+        this.productoDTO = productoDTO;
+    }
 }
