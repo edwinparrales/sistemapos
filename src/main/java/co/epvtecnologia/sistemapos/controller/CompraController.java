@@ -1,6 +1,7 @@
 package co.epvtecnologia.sistemapos.controller;
 
 
+import co.epvtecnologia.sistemapos.domain.DetalleCompra;
 import co.epvtecnologia.sistemapos.model.CompraDTO;
 import co.epvtecnologia.sistemapos.model.ProductoDTO;
 import co.epvtecnologia.sistemapos.service.CompraService;
@@ -20,6 +21,7 @@ import java.util.List;
 public class CompraController {
     @Autowired
      private CompraService compraService;
+
     @GetMapping()
     public String list(final Model model){
 
@@ -50,8 +52,12 @@ public class CompraController {
 
     @GetMapping("/add/producto/{rowid}")
 
-    public String addProducto(@PathVariable("rowid") Long rowid ,final Model model){
+    public String addProducto(@PathVariable("rowid") Long rowid , final Model model){
         CompraDTO compraDTO = compraService.getCompraDTO(rowid);
+
+
+
+
 
         model.addAttribute("compra",compraDTO);
 

@@ -1,6 +1,7 @@
 package co.epvtecnologia.sistemapos.service;
 
 import co.epvtecnologia.sistemapos.domain.Compra;
+import co.epvtecnologia.sistemapos.domain.DetalleCompra;
 import co.epvtecnologia.sistemapos.domain.Producto;
 import co.epvtecnologia.sistemapos.model.CompraDTO;
 import co.epvtecnologia.sistemapos.model.ProductoDTO;
@@ -18,6 +19,9 @@ public class CompraService {
     private CompraRepository compraRepository;
     @Autowired
     private ProductoService productoService;
+
+    @Autowired
+    private DetalleCompraService detalleCompraService;
 
     public List<CompraDTO>  getListCompraDTO(){
 
@@ -79,4 +83,20 @@ public class CompraService {
 
         return  productoService.findByCodigoBarras(codBarras);
     }
+
+
+    public DetalleCompra guardarDetalleCompra(DetalleCompra detalleCompra){
+        return  detalleCompraService.guardar(detalleCompra);
+    }
+
+    public List<DetalleCompra> listaDetalleCompra(){
+
+        return detalleCompraService.listaDetalleCompra();
+    }
+
+    public Compra getCompra(Long rowid){
+
+        return compraRepository.findById(rowid).get();
+    }
+
 }
