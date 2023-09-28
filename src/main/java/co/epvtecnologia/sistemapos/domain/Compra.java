@@ -1,6 +1,7 @@
 package co.epvtecnologia.sistemapos.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ public class Compra {
 
 
     @OneToMany(mappedBy = "compra")
+            @JsonIgnoreProperties
     List<DetalleCompra> detalleCompraList;
 
 

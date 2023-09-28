@@ -117,11 +117,23 @@
 
     <script th:inline="javascript" type="application/javascript">
 
-        var compraRowid = /*[[${compra.rowid}]]*/ 'mensaje predeterminado';
+        var compraRowid = [[${compra.rowid}]] ;
 
 
 
         $(document).ready(function () {
+
+            $.ajax({
+                type:"get",
+                url:"/compras/detalleCompra/1",
+                success:function (dat){
+                    console.log(dat);
+                },
+                dataType:"json",
+                error:function (err){
+                    console.log(err)
+                }
+            })
 
 
         });

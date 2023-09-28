@@ -1,5 +1,6 @@
 package co.epvtecnologia.sistemapos.service;
 
+import co.epvtecnologia.sistemapos.domain.Compra;
 import co.epvtecnologia.sistemapos.domain.DetalleCompra;
 import co.epvtecnologia.sistemapos.repos.DetalleCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class DetalleCompraService {
 
         return  detalleCompraRepository.save(detalleCompra);
     }
+
+
 
 
 

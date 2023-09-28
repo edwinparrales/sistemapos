@@ -12,6 +12,7 @@ import co.epvtecnologia.sistemapos.service.DetalleCompraService;
 import co.epvtecnologia.sistemapos.service.ProductoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,32 +72,6 @@ public class CompraController {
     }
 
 
-    @PostMapping("/add/detalle-compra")
-    @ResponseBody
-    public ResponseEntity addDetalleCompra (@RequestBody DataDteCompraDTO dataDteCompraDTO){
-        DetalleCompra detalleCompra = new DetalleCompra();
-        ProductoDTO productoDTO = productoService.get(dataDteCompraDTO.getRowidProducto());
-
-        Producto producto = productoService.mapToEntity(productoDTO,new Producto());
-
-        Compra compra=compraService.getCompra(dataDteCompraDTO.getRowidCompra());
-
-
-        detalleCompra.setProducto(producto);
-        detalleCompra.setCompra(compra);
-        detalleCompra.setCantidad(   Integer.parseInt(dataDteCompraDTO.getCantidad().toString()));
-        detalleCompra.setCantidadAnterior(Integer.parseInt(producto.getCantidad().toString()));
-
-        producto.setCantidad(producto.getCantidad()+ dataDteCompraDTO.getCantidad());
-
-        productoService.update(producto.getId(),productoService.mapToDTO(producto,new ProductoDTO()));
-
-
-       DetalleCompra dte = detalleCompraService.guardar(detalleCompra);
-
-        return ResponseEntity.ok("Realizaep");
-    }
-
 
 
 
@@ -122,6 +97,46 @@ public class CompraController {
     public ResponseEntity<ProductoDTO> buscarProductoCodigoBarras(@PathVariable String codBarras){
 
         return ResponseEntity.ok(compraService.buscarProductoCodigoBarras(codBarras));
+    }
+
+    @PostMapping("/add/detalle-compra")
+    @ResponseBody
+    public ResponseEntity addDetalleCompra (@RequestBody DataDteCompraDTO dataDteCompraDTO){
+        DetalleCompra detalleCompra = new DetalleCompra();
+        ProductoDTO productoDTO = productoService.get(dataDteCompraDTO.getRowidProducto());
+
+        Producto producto = productoService.mapToEntity(productoDTO,new Producto());
+
+        Compra compra=compraService.getCompra(dataDteCompraDTO.getRowidCompra());
+
+
+        detalleCompra.setProducto(producto);
+        detalleCompra.setCompra(compra);
+        detalleCompra.setCantidad(   Integer.parseInt(dataDteCompraDTO.getCantidad().toString()));
+        detalleCompra.setCantidadAnterior(Integer.parseInt(producto.getCantidad().toString()));
+
+        producto.setCantidad(producto.getCantidad()+ dataDteCompraDTO.getCantidad());
+
+        productoService.update(producto.getId(),productoService.mapToDTO(producto,new ProductoDTO()));
+
+
+        DetalleCompra dte = detalleCompraService.guardar(detalleCompra);
+
+        return ResponseEntity.ok("Realizaep");
+    }
+
+
+    @GetMapping("/detalleCompra/{rowidcompra}")
+    @ResponseBody
+    public ResponseEntity getDetalleCompra(@PathVariable Long rowidcompra){
+
+        //Compra compra = compraService.getCompra(rowidcompra);
+
+        List<DetalleCompra> detalleCompraList = detalleCompraService.listaDetalleCompra();
+
+
+        return  ResponseEntity.ok(detalleCompraList);
+
     }
 
 

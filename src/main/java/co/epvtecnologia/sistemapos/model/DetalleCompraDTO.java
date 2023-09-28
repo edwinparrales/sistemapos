@@ -6,52 +6,88 @@ import jakarta.persistence.*;
 
 public class DetalleCompraDTO {
 
+       private Long rowidProducto;
+       private String codigoProducto;
+       private String codigoBarrasProducto;
+       private String nombreProducto;
+
+       private Long cantidad;
+
+       private double valorTotal;
+       private double valorUnidadProducto;
+       private Long rowidCompra;
+       private Long rowidDetalleCompra;
 
 
-    private Long rowid;
-    private int cantidadAnterior;
-    private int cantidad;
-    private Compra compra;
-    private Producto producto;
-
-
-    public Long getRowid() {
-        return rowid;
+    public Long getRowidProducto() {
+        return rowidProducto;
     }
 
-    public void setRowid(Long rowid) {
-        this.rowid = rowid;
+    public void setRowidProducto(Long rowidProducto) {
+        this.rowidProducto = rowidProducto;
     }
 
-    public int getCantidadAnterior() {
-        return cantidadAnterior;
+    public String getCodigoBarrasProducto() {
+        return codigoBarrasProducto;
     }
 
-    public void setCantidadAnterior(int cantidadAnterior) {
-        this.cantidadAnterior = cantidadAnterior;
+    public void setCodigoBarrasProducto(String codigoBarrasProducto) {
+        this.codigoBarrasProducto = codigoBarrasProducto;
     }
 
-    public int getCantidad() {
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public Long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
-    public Compra getCompra() {
-        return compra;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setCompra(Compra compra) {
-        this.compra = compra;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public double getValorUnidadProducto() {
+        return valorUnidadProducto;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setValorUnidadProducto(double valorUnidadProducto) {
+        this.valorUnidadProducto = valorUnidadProducto;
+    }
+
+    public Long getRowidCompra() {
+        return rowidCompra;
+    }
+
+    public void setRowidCompra(Long rowidCompra) {
+        this.rowidCompra = rowidCompra;
+    }
+
+    public Long getRowidDetalleCompra() {
+        return rowidDetalleCompra;
+    }
+
+    public void setRowidDetalleCompra(Long rowidDetalleCompra) {
+        this.rowidDetalleCompra = rowidDetalleCompra;
+    }
+
+    public String getCodigoProducto() {
+        return codigoProducto;
+    }
+
+    public void setCodigoProducto(String codigoProducto) {
+        this.codigoProducto = codigoProducto;
     }
 }

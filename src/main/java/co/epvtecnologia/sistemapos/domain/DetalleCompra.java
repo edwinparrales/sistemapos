@@ -1,5 +1,7 @@
 package co.epvtecnologia.sistemapos.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class DetalleCompra {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_compra")
+    @JsonIgnoreProperties
     private Compra compra;
 
     @ManyToOne(fetch = FetchType.EAGER)
