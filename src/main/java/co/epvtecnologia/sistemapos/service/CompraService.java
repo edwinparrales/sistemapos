@@ -16,6 +16,8 @@ public class CompraService {
 
     @Autowired
     private CompraRepository compraRepository;
+    @Autowired
+    private ProductoService productoService;
 
     public List<CompraDTO>  getListCompraDTO(){
 
@@ -26,6 +28,19 @@ public class CompraService {
 
     }
 
+    public Long guardar(CompraDTO compraDTO){
+
+        Compra compra = mapToCompraEntity(new Compra(),compraDTO);
+        return  compraRepository.save(compra).getRowid();
+    }
+
+     public CompraDTO  getCompraDTO(Long rowid){
+        Compra compra = compraRepository.findById(rowid).get();
+
+      return  mapToCompraDTO(compra,new CompraDTO());
+
+
+     }
 
 
     public CompraDTO mapToCompraDTO(Compra compraEntity,CompraDTO compraDTO){
@@ -34,7 +49,7 @@ public class CompraService {
         compraDTO.setFechaRegistro(compraEntity.getFechaRegistro());
         compraDTO.setNitProveedor(compraEntity.getNitProveedor());
         compraDTO.setRazonSocialProveedor(compraEntity.getRazonSocialProveedor());
-        //compraDTO.setDetalleCompraDTOList(compraEntity.getDetalleCompraList());
+        compraDTO.setDetalleCompraList(compraEntity.getDetalleCompraList());
 
         compraDTO.setValorTotal(compraEntity.getValorTotal());
 
@@ -49,9 +64,19 @@ public class CompraService {
         compraEntity.setFechaRegistro(compraDTO.getFechaRegistro());
         compraEntity.setNitProveedor(compraDTO.getNitProveedor());
         compraEntity.setRazonSocialProveedor(compraDTO.getRazonSocialProveedor());
-        //compraEntity.setDetalleCompraDTOList(compraDTO.getDetalleCompraList());
+        compraEntity.setDetalleCompraList(compraDTO.getDetalleCompraList());
 
         compraEntity.setValorTotal(compraDTO.getValorTotal());
         return compraEntity;
+    }
+
+    public ProductoDTO buscarProductoCodigo(String codigoInterno) {
+
+        return  productoService.findByCodigoInterno(codigoInterno);
+    }
+
+    public ProductoDTO buscarProductoCodigoBarras(String codBarras) {
+
+        return  productoService.findByCodigoBarras(codBarras);
     }
 }

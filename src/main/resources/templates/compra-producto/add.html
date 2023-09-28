@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+ >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Compras Producto</title>
 </head>
 <body>
+     <div layout:fragment="content">
+         <h1>Formulario de compras producto</h1>
 
+         <div>
+             <form  th:action="@{/compras/add}" method="post" th:object="${compra}">
+                 <div class="">
+
+                     <div>
+                         <label for="fecha">Fecha</label>
+                         <input type="date" name="fecha" id="fecha" th:field="*{fechaRegistro}">
+                     </div>
+                     <div>
+                         <label for="codigoFactura">Codigo Factura:</label>
+                         <input type="text" name="codigoFactura" id="codigoFactura" th:field="*{codigoFactuar}">
+                     </div>
+                     <div>
+                         <label for="nitProveedor">Nit del proveedor:</label>
+                         <input type="text" name="nitProveedor" id="nitProveedor" th:field="*{nitProveedor}">
+
+                     </div>
+                     <div>
+
+                         <label for="nombreProveedor">Nombre del proveedor:</label>
+                         <input type="text" name="nombreProveedor" id="nombreProveedor" th:field="*{razonSocialProveedor}">
+
+                     </div>
+
+                 </div>
+
+                 <button class="btn btn-success" type="submit">Registrar</button>
+
+
+             </form>
+         </div>
+
+
+
+     </div>
 </body>
 </html>

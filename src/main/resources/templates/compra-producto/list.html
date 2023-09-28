@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Listado Compras</title>
 </head>
 <body>
+
+ <div layout:fragment="content">
+      <h1>Listado de compras </h1>
+     <div class="d-flex flex-wrap mb-4">
+
+         <div>
+             <a th:href="@{/compras/add}" class="btn btn-primary ms-2"> Nuevo </a>
+         </div>
+     </div>
+     <hr>
+
+     <table class="table table-hover">
+         <tr>
+              <td>Id</td>
+             <td>Codigo Factura</td>
+             <td>Fecha</td>
+             <td>Razon Social Proveedor</td>
+             <td>Nit</td>
+             <td>Valor Total</td>
+             <td>Operaciones</td>
+         </tr>
+         <tbody>
+            <tr th:each="compra:${compras}">
+                <td th:text="${compra.rowid}"></td>
+                <td th:text="${compra.codigoFactuar}"></td>
+                <td th:text="${compra.fechaRegistro}"></td>
+                <td th:text="${compra.razonSocialProveedor}"></td>
+                <td th:text="${compra.nitProveedor}"></td>
+                <td th:text="${compra.valorTotal}"></td>
+                <td>
+                    operac
+                </td>
+            </tr>
+         </tbody>
+     </table>
+
+ </div>
 
 </body>
 </html>

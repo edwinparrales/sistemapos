@@ -14,18 +14,27 @@
 
         <div class="d-flex flex-row m-2">
 
-            <div>
-                <label for="fecha">Fecha</label>
-                <input type="text" name="fecha" id="fecha" th:value="${ingreosProductoDTO.fecha}" readonly>
-            </div>
-            <div>
-                <label for="codigoFactura">Codigo Factura:</label>
-                <input type="text" name="codigoFactura" id="codigoFactura" th:value="${ingreosProductoDTO.codFactura}"  readonly>
-            </div>
-            <div>
+            <div class="">
 
-                <label for="nombreProveedor">Nombre del proveedor:</label>
-                <input type="text" name="nombreProveedor" id="nombreProveedor"  th:value="${ingreosProductoDTO.nombreProveedor}" readonly>
+                <div>
+                    <label for="fecha">Fecha</label>
+                    <input type="date" name="fecha" id="fecha" th:value="${compra.fechaRegistro}"/>
+                </div>
+                <div>
+                    <label for="codigoFactura">Codigo Factura:</label>
+                    <input type="text" name="codigoFactura" id="codigoFactura" th:value="${compra.codigoFactuar}"/>
+                </div>
+                <div>
+                    <label for="nitProveedor">Nit del proveedor:</label>
+                    <input type="text" name="nitProveedor" id="nitProveedor" th:value="${compra.nitProveedor}"/>
+
+                </div>
+                <div>
+
+                    <label for="nombreProveedor">Nombre del proveedor:</label>
+                    <input type="text" name="nombreProveedor" id="nombreProveedor" th:value="${compra.nitProveedor}">
+
+                </div>
 
             </div>
 
@@ -121,11 +130,12 @@
            });
 
            $("#btnBuscarCodigo").click( function (e){
+               let url = "/compras/buscarProductoCodInterno/"
                let codigo = $("#codigo").val();
 
                $.ajax({
                    type: "GET",
-                   url: "/ingreso-productos/buscarCodigo/"+codigo,
+                   url: url+codigo,
 
                    success: function (data) {
 
