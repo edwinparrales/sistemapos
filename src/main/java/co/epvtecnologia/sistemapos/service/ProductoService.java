@@ -87,4 +87,20 @@ public class ProductoService {
         return productoRepository.existsByCodigoInternoIgnoreCase(codigoInterno);
     }
 
+    public  ProductoDTO findByCodigoBarras(String codBarras){
+
+        Producto producto = productoRepository.findByCodigoBarras(codBarras);
+
+        return mapToDTO(producto,new ProductoDTO());
+
+    }
+
+    public  ProductoDTO findByCodigoInterno(String codInterno){
+
+        Producto producto = productoRepository.findByCodigoInterno(codInterno);
+
+        return mapToDTO(producto,new ProductoDTO());
+
+    }
+
 }

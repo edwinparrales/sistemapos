@@ -39,7 +39,7 @@
         <form action="" method="get">
             <label for="codigo">Codigo:</label>
             <input type="text" name="codigo" id="codigo">
-            <button type="submit">Buscar</button>
+            <button type="button" id="btnBuscarCodigo">Buscar</button>
         </form>
 
 
@@ -47,7 +47,7 @@
 
             <label for="codigoBarras">Codigo de Barras:</label>
             <input type="text" name="codigoBarras" id="codigoBarras">
-            <button type="submit">Buscar</button>
+            <button type="button" id="btnBuscarCodigoBarras">Buscar</button>
         </form>
 
 
@@ -58,22 +58,22 @@
 
     <div class="d-flex flex-row gap-md-5 m-2">
 
-        <form action="" method="post">
+        <form  method="get" action="">
 
 
             <div class="d-flex flex-row m-2">
                 <div>
                     <label for="idProducto">id Producto:</label>
-                    <input type="number" name="idProducto" id="idProducto" readonly th:value="${ingreosProductoDTO.id}" />
+                    <input type="number" name="idProducto" id="idProducto" readonly />
                 </div>
                 <div>
                     <label for="producto">Nombre Producto:</label>
-                    <input id="producto" type="text" name="producto" readonly />
+                    <input id="producto" type="text" name="producto" readonly  />
                 </div>
 
                 <label for="cantidad">Cantidad:</label>
                 <input type="number" name="cantidad" id="cantidad" />
-                <button>Adicionar+</button>
+                <button class="btn btn-success" type="button" id="btnAdicinarDteProducto">Adicionar+</button>
             </div>
         </form>
 
@@ -118,10 +118,14 @@
            $( document ).ready(function() {
 
 
+           });
+
+           $("#btnBuscarCodigo").click( function (e){
+               let codigo = $("#codigo").val();
 
                $.ajax({
                    type: "GET",
-                   url: "/ingreso-productos/buscarCodigo/1",
+                   url: "/ingreso-productos/buscarCodigo/"+codigo,
 
                    success: function (data) {
 
@@ -131,13 +135,24 @@
                        console.log(data)
 
                    },
-                   dataType: "json"
+                   dataType: "json",
+                   error:function (e) {
+                       console.log(e)
+                       $("#idProducto").val("")
+                       $("#producto").val("")
+                   }
                });
 
 
+           })
+
+           $("#btnAdicinarDteProducto").click(function (e) {
 
 
+
+               console.log("dete de producto")
            });
+
        </script>
 
 </div>

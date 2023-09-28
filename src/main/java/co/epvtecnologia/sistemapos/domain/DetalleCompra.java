@@ -1,37 +1,34 @@
 package co.epvtecnologia.sistemapos.domain;
 
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "DETALLE_INGRESO_PRODUCTOS")
-public class DetalleIngresoProducto
-{
+@Table(name = "DETALLE_COMPRAS")
+public class DetalleCompra {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long idDetalleIngProducto;
+    private Long rowid;
     private int cantidadAnterior;
     private int cantidad;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ingreso_producto")
-    private IngresoProducto ingresoProducto;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_compra")
+    private Compra compra;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_producto")
     private Producto producto;
 
 
-
-
-    public Long getIdDetalleIngProducto() {
-        return idDetalleIngProducto;
+    public Long getRowid() {
+        return rowid;
     }
 
-    public void setIdDetalleIngProducto(Long idDetalleIngProducto) {
-        this.idDetalleIngProducto = idDetalleIngProducto;
+    public void setRowid(Long rowid) {
+        this.rowid= rowid;
     }
 
     public int getCantidadAnterior() {
@@ -50,12 +47,12 @@ public class DetalleIngresoProducto
         this.cantidad = cantidad;
     }
 
-    public IngresoProducto getIngresoProducto() {
-        return ingresoProducto;
+    public Compra getCompra() {
+        return compra;
     }
 
-    public void setIngresoProducto(IngresoProducto ingresoProducto) {
-        this.ingresoProducto = ingresoProducto;
+    public void setCompra(Compra compra) {
+        this.compra = compra;
     }
 
     public Producto getProducto() {

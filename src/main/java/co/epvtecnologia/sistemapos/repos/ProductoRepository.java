@@ -13,4 +13,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     boolean existsByCodigoInternoIgnoreCase(String codigoInterno);
 
+    Producto findByCodigoBarras(String codBarras);
+    Producto findByCodigoInterno(String codInterno);
+
 }
