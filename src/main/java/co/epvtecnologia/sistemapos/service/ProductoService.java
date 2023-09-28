@@ -53,7 +53,7 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-    private ProductoDTO mapToDTO(final Producto producto, final ProductoDTO productoDTO) {
+    public ProductoDTO mapToDTO(final Producto producto, final ProductoDTO productoDTO) {
         productoDTO.setId(producto.getId());
         productoDTO.setCodigoBarras(producto.getCodigoBarras());
         productoDTO.setCodigoInterno(producto.getCodigoInterno());
@@ -66,7 +66,8 @@ public class ProductoService {
         return productoDTO;
     }
 
-    private Producto mapToEntity(final ProductoDTO productoDTO, final Producto producto) {
+    public Producto mapToEntity(final ProductoDTO productoDTO, final Producto producto) {
+        producto.setId(productoDTO.getId());
         producto.setCodigoBarras(productoDTO.getCodigoBarras());
         producto.setCodigoInterno(productoDTO.getCodigoInterno());
         producto.setDescripcion(productoDTO.getDescripcion());

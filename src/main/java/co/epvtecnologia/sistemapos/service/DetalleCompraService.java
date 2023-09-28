@@ -24,4 +24,6 @@ public class DetalleCompraService {
         return  detalleCompraRepository.save(detalleCompra);
     }
 
+
+
 }

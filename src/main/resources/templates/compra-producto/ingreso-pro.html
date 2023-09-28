@@ -12,33 +12,34 @@
     <h1>Ingreso de Inventarios</h1>
 
 
-        <div class="d-flex flex-row m-2">
+    <div class="d-flex flex-row m-2">
 
-            <div class="">
+        <div class="">
 
-                <div>
-                    <label for="fecha">Fecha</label>
-                    <input type="date" name="fecha" id="fecha" th:value="${compra.fechaRegistro}"/>
-                </div>
-                <div>
-                    <label for="codigoFactura">Codigo Factura:</label>
-                    <input type="text" name="codigoFactura" id="codigoFactura" th:value="${compra.codigoFactuar}"/>
-                </div>
-                <div>
-                    <label for="nitProveedor">Nit del proveedor:</label>
-                    <input type="text" name="nitProveedor" id="nitProveedor" th:value="${compra.nitProveedor}"/>
+            <div>
+                <label for="fecha">Fecha</label>
+                <input type="date" name="fecha" id="fecha" th:value="${compra.fechaRegistro}"/>
+            </div>
+            <div>
+                <label for="codigoFactura">Codigo Factura:</label>
+                <input type="text" name="codigoFactura" id="codigoFactura" th:value="${compra.codigoFactuar}"/>
+            </div>
+            <div>
+                <label for="nitProveedor">Nit del proveedor:</label>
+                <input type="text" name="nitProveedor" id="nitProveedor" th:value="${compra.nitProveedor}"/>
 
-                </div>
-                <div>
+            </div>
+            <div>
 
-                    <label for="nombreProveedor">Nombre del proveedor:</label>
-                    <input type="text" name="nombreProveedor" id="nombreProveedor" th:value="${compra.nitProveedor}">
-
-                </div>
+                <label for="nombreProveedor">Nombre del proveedor:</label>
+                <input type="text" name="nombreProveedor" id="nombreProveedor" th:value="${compra.nitProveedor}">
 
             </div>
 
+
         </div>
+
+    </div>
 
 
     <hr>
@@ -60,28 +61,27 @@
         </form>
 
 
-
-
     </div>
     <hr>
 
     <div class="d-flex flex-row gap-md-5 m-2">
 
-        <form  method="get" action="">
+        <form method="get" action="">
 
 
             <div class="d-flex flex-row m-2">
+
                 <div>
                     <label for="idProducto">id Producto:</label>
-                    <input type="number" name="idProducto" id="idProducto" readonly />
+                    <input type="number" name="idProducto" id="idProducto" readonly/>
                 </div>
                 <div>
                     <label for="producto">Nombre Producto:</label>
-                    <input id="producto" type="text" name="producto" readonly  />
+                    <input id="producto" type="text" name="producto" readonly/>
                 </div>
 
                 <label for="cantidad">Cantidad:</label>
-                <input type="number" name="cantidad" id="cantidad" />
+                <input type="number" name="cantidad" id="cantidad" min="1" VALUE="1"/>
                 <button class="btn btn-success" type="button" id="btnAdicinarDteProducto">Adicionar+</button>
             </div>
         </form>
@@ -103,67 +103,89 @@
             <tbody>
             <tr>
                 <td>Cod-452</td>
-                <td>77785282</td>
+                <td >77785282</td>
                 <td>Teclado Usb</td>
                 <td>1</td>
                 <td>50.000</td>
                 <td>50.000</td>
             </tr>
-            <tr>
-                <td>Cod-452</td>
-                <td>77785282</td>
-                <td>Teclado Usb</td>
-                <td>1</td>
-                <td>50.000</td>
-                <td>50.000</td>
-            </tr>
+
             </tbody>
         </table>
 
     </div>
 
-       <script type="application/javascript">
+    <script th:inline="javascript" type="application/javascript">
 
-           $( document ).ready(function() {
-
-
-           });
-
-           $("#btnBuscarCodigo").click( function (e){
-               let url = "/compras/buscarProductoCodInterno/"
-               let codigo = $("#codigo").val();
-
-               $.ajax({
-                   type: "GET",
-                   url: url+codigo,
-
-                   success: function (data) {
-
-                       $("#idProducto").val(data.id)
-                       $("#producto").val(data.descripcion)
-
-                       console.log(data)
-
-                   },
-                   dataType: "json",
-                   error:function (e) {
-                       console.log(e)
-                       $("#idProducto").val("")
-                       $("#producto").val("")
-                   }
-               });
-
-
-           })
-
-           $("#btnAdicinarDteProducto").click(function (e) {
+        var compraRowid = /*[[${compra.rowid}]]*/ 'mensaje predeterminado';
 
 
 
-               console.log("dete de producto")
-           });
+        $(document).ready(function () {
 
-       </script>
+
+        });
+
+        $("#btnBuscarCodigo").click(function (e) {
+            let url = "/compras/buscarProductoCodInterno/"
+            let codigo = $("#codigo").val();
+
+            $.ajax({
+                type: "GET",
+                url: url + codigo,
+
+                success: function (data) {
+
+                    $("#idProducto").val(data.id)
+                    $("#producto").val(data.descripcion)
+
+                    console.log(data)
+
+                },
+                dataType: "json",
+                error: function (e) {
+                    console.log(e)
+                    $("#idProducto").val("")
+                    $("#producto").val("")
+                }
+            });
+
+
+        })
+
+        $("#btnAdicinarDteProducto").click(function (e) {
+             let detalleCompra={
+                 "rowidProducto":$("#idProducto").val() ,
+                 "rowidCompra":compraRowid,
+                 "cantidad":$("#cantidad").val(),
+                 "cantidadAnterior":0
+
+
+
+             }
+
+
+
+             console.log(detalleCompra);
+
+             $.ajax({
+                 type: "POST",
+                 url: "/compras/add/detalle-compra",
+                 contentType : "application/json",
+                 data : JSON.stringify(detalleCompra),
+                 dataType : 'json',
+                  success: function (d) {
+                      console.log(d)
+                  }
+             })
+
+
+        });
+
+
+
+
+    </script>
 
 </div>
 
