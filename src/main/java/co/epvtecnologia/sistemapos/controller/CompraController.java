@@ -64,8 +64,8 @@ public class CompraController {
 
     public String addProducto(@PathVariable("rowid") Long rowid , final Model model){
         CompraDTO compraDTO = compraService.getCompraDTO(rowid);
-        //List<DetalleCompra> detalleCompraList = compraService.getDetalleCompra(compraDTO.getRowid());
-        //model.addAttribute("detalleCompras",detalleCompraList);
+        List<DetalleCompra> detalleCompraList = detalleCompraService.detalleCompraListByRowidCompra(compraDTO.getRowid());
+        model.addAttribute("detalleCompras",detalleCompraList);
         model.addAttribute("compra",compraDTO);
 
         return "compra-producto/ingreso-pro";

@@ -26,7 +26,10 @@ public class DetalleCompraService {
     }
 
 
+   public List<DetalleCompra> detalleCompraListByRowidCompra(long rowidCompra){
 
+        return detalleCompraRepository.findByIdCompra(rowidCompra);
+   }
 
 
 }

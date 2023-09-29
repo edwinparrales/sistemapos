@@ -101,13 +101,13 @@
                 <td>Valor Total</td>
             </tr>
             <tbody>
-            <tr>
-                <td>Cod-452</td>
-                <td >77785282</td>
-                <td>Teclado Usb</td>
-                <td>1</td>
-                <td>50.000</td>
-                <td>50.000</td>
+            <tr th:each="detalleCompra:${detalleCompras}">
+                <td th:text="${detalleCompra.producto.codigoInterno}"></td>
+                <td th:text="${detalleCompra.producto.codigoBarras}"></td>
+                <td th:text="${detalleCompra.producto.descripcion}"></td>
+                <td th:text="${detalleCompra.cantidad}">1</td>
+                <td th:text="${detalleCompra.producto.valor}">50.000</td>
+                <td th:text="${detalleCompra.cantidad}*${detalleCompra.producto.valor}">50.000</td>
             </tr>
 
             </tbody>
