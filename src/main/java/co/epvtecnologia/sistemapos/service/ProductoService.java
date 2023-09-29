@@ -61,7 +61,7 @@ public class ProductoService {
         productoDTO.setValor(producto.getValor());
         productoDTO.setCantidad(producto.getCantidad());
         productoDTO.setUrlImagen(producto.getUrlImagen());
-        productoDTO.setIdCategoria(producto.getIdCategoria() == null ? null : producto.getIdCategoria().getId());
+        productoDTO.setIdCategoria(producto.getIdCategoria());
 
         return productoDTO;
     }
@@ -76,7 +76,7 @@ public class ProductoService {
         producto.setUrlImagen(productoDTO.getUrlImagen());
         final Categoria idCategoria = productoDTO.getIdCategoria() == null ? null : categoriaRepository.findById(productoDTO.getIdCategoria())
                 .orElseThrow(() -> new NotFoundException("idCategoria not found"));
-        producto.setIdCategoria(idCategoria);
+        producto.setIdCategoria(idCategoria.getId());
         return producto;
     }
 

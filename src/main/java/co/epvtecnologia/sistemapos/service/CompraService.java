@@ -53,7 +53,7 @@ public class CompraService {
         compraDTO.setFechaRegistro(compraEntity.getFechaRegistro());
         compraDTO.setNitProveedor(compraEntity.getNitProveedor());
         compraDTO.setRazonSocialProveedor(compraEntity.getRazonSocialProveedor());
-        compraDTO.setDetalleCompraList(compraEntity.getDetalleCompraList());
+
 
         compraDTO.setValorTotal(compraEntity.getValorTotal());
 
@@ -68,7 +68,7 @@ public class CompraService {
         compraEntity.setFechaRegistro(compraDTO.getFechaRegistro());
         compraEntity.setNitProveedor(compraDTO.getNitProveedor());
         compraEntity.setRazonSocialProveedor(compraDTO.getRazonSocialProveedor());
-        compraEntity.setDetalleCompraList(compraDTO.getDetalleCompraList());
+
 
         compraEntity.setValorTotal(compraDTO.getValorTotal());
         return compraEntity;

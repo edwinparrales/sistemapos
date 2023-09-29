@@ -15,14 +15,19 @@ public class DetalleCompra {
     private int cantidadAnterior;
     private int cantidad;
 
+    @Column(name = "id_compra")
+    private Long idCompra;
+
+    @Column(name = "id_producto")
+    private Long idProducto;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_compra")
-    @JsonIgnoreProperties
+    @JoinColumn(name = "id_compra",updatable = false,insertable = false)
     private Compra compra;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "id_producto",updatable = false,insertable = false)
     private Producto producto;
 
 
@@ -65,4 +70,23 @@ public class DetalleCompra {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
+    public Long getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(Long idCompra) {
+        this.idCompra = idCompra;
+    }
+
+    public Long getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
+    }
+
+
+
 }

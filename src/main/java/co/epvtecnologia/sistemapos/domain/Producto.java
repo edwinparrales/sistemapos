@@ -36,9 +36,12 @@ public class Producto {
     @Column
     private String urlImagen;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categoria_id")
-    private Categoria idCategoria;
+    @Column(name = "id_categoria")
+    private Long idCategoria;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_categoria",updatable = false,insertable = false)
+    private Categoria categoria;
 
     public Long getId() {
         return id;
@@ -96,12 +99,19 @@ public class Producto {
         this.urlImagen = urlImagen;
     }
 
-    public Categoria getIdCategoria() {
+    public Long getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(final Categoria idCategoria) {
+    public void setIdCategoria(Long idCategoria) {
         this.idCategoria = idCategoria;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }

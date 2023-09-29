@@ -110,8 +110,8 @@ public class CompraController {
         Compra compra=compraService.getCompra(dataDteCompraDTO.getRowidCompra());
 
 
-        detalleCompra.setProducto(producto);
-        detalleCompra.setCompra(compra);
+        detalleCompra.setIdProducto(producto.getId());
+        detalleCompra.setIdCompra(compra.getRowid());
         detalleCompra.setCantidad(   Integer.parseInt(dataDteCompraDTO.getCantidad().toString()));
         detalleCompra.setCantidadAnterior(Integer.parseInt(producto.getCantidad().toString()));
 

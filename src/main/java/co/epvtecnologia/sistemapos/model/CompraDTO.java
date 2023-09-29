@@ -22,7 +22,7 @@ public class CompraDTO {
 
     private double valorTotal;
 
-    List<DetalleCompra> detalleCompraList;
+
 
     public Long getRowid() {
         return rowid;
@@ -72,11 +72,5 @@ public class CompraDTO {
         this.valorTotal = valorTotal;
     }
 
-    public List<DetalleCompra> getDetalleCompraList() {
-        return detalleCompraList;
-    }
 
-    public void setDetalleCompraList(List<DetalleCompra> detalleCompraList) {
-        this.detalleCompraList = detalleCompraList;
-    }
 }

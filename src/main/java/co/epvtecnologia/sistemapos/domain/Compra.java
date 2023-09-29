@@ -1,6 +1,7 @@
 package co.epvtecnologia.sistemapos.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -27,10 +28,10 @@ public class Compra {
 
     private double valorTotal;
 
+    @OneToMany(mappedBy = "compra",fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<DetalleCompra> detalleCompraList;
 
-    @OneToMany(mappedBy = "compra")
-            @JsonIgnoreProperties
-    List<DetalleCompra> detalleCompraList;
 
 
     public Long getRowid() {
@@ -73,13 +74,6 @@ public class Compra {
         this.valorTotal = valorTotal;
     }
 
-    public List<DetalleCompra> getDetalleCompraList() {
-        return detalleCompraList;
-    }
-
-    public void setDetalleCompraList(List<DetalleCompra> detalleCompraList) {
-        this.detalleCompraList = detalleCompraList;
-    }
 
     public String getCodigoFactuar() {
         return codigoFactuar;
@@ -87,5 +81,13 @@ public class Compra {
 
     public void setCodigoFactuar(String codigoFactuar) {
         this.codigoFactuar = codigoFactuar;
+    }
+
+    public List<DetalleCompra> getDetalleCompraList() {
+        return detalleCompraList;
+    }
+
+    public void setDetalleCompraList(List<DetalleCompra> detalleCompraList) {
+        this.detalleCompraList = detalleCompraList;
     }
 }
