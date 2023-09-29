@@ -9,6 +9,8 @@ public class DataDteCompraDTO {
 
     private Long cantidadAnterior;
 
+    private String nombreProducto;
+
 
     public Long getRowidProducto() {
         return rowidProducto;
@@ -40,5 +42,13 @@ public class DataDteCompraDTO {
 
     public void setCantidadAnterior(Long cantidadAnterior) {
         this.cantidadAnterior = cantidadAnterior;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 }

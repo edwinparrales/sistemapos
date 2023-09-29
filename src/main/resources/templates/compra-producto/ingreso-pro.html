@@ -66,25 +66,31 @@
 
     <div class="d-flex flex-row gap-md-5 m-2">
 
-        <form method="get" action="">
+          <form th:action="@{/compras/add/detalle-compra}" th:object="${dataDteCompraDTO}" th:method="post">
+              <div>
+                  <label for="rowidCompra">Rowid Compra:</label>
+                  <input type="number" name="rowidCompra" id="rowidCompra" th:value="${compra.rowid}" readonly th:field="*{rowidCompra}" required>
 
+              </div>
 
             <div class="d-flex flex-row m-2">
 
+
+
                 <div>
                     <label for="idProducto">id Producto:</label>
-                    <input type="number" name="idProducto" id="idProducto" readonly/>
+                    <input type="number" name="idProducto" id="idProducto" readonly  th:field="*{rowidProducto}"/>
                 </div>
                 <div>
                     <label for="producto">Nombre Producto:</label>
-                    <input id="producto" type="text" name="producto" readonly/>
+                    <input id="producto" type="text" name="producto" readonly th:field="*{nombreProducto}"/>
                 </div>
 
                 <label for="cantidad">Cantidad:</label>
-                <input type="number" name="cantidad" id="cantidad" min="1" VALUE="1"/>
-                <button class="btn btn-success" type="button" id="btnAdicinarDteProducto">Adicionar+</button>
+                <input type="number" name="cantidad" id="cantidad" th:min="1" th:field="*{cantidad}" required/>
+                <button class="btn btn-success" type="submit" id="btnAdicinarDteProducto">Adicionar+</button>
             </div>
-        </form>
+          </form>
 
     </div>
 
@@ -106,13 +112,14 @@
                 <td th:text="${detalleCompra.producto.codigoBarras}"></td>
                 <td th:text="${detalleCompra.producto.descripcion}"></td>
                 <td th:text="${detalleCompra.cantidad}">1</td>
-                <td th:text="${detalleCompra.producto.valor}">50.000</td>
-                <td th:text="${detalleCompra.cantidad}*${detalleCompra.producto.valor}">50.000</td>
+                <td th:text="${detalleCompra.producto.valor}"></td>
+                <td th:text="${detalleCompra.cantidad}*${detalleCompra.producto.valor}"></td>
             </tr>
 
             </tbody>
         </table>
-
+        <label for="valorTotal">ValorTotal:</label>
+          <input id="valorTotal"  name="valorTotal" class="bg-danger" type="number" th:value="${valorTotal}" readonly/>
     </div>
 
     <script th:inline="javascript" type="application/javascript">
@@ -122,18 +129,18 @@
 
 
         $(document).ready(function () {
-
-            $.ajax({
-                type:"get",
-                url:"/compras/detalleCompra/1",
-                success:function (dat){
-                    console.log(dat);
-                },
-                dataType:"json",
-                error:function (err){
-                    console.log(err)
-                }
-            })
+                     /*
+                        $.ajax({
+                            type:"get",
+                            url:"/api/detallecompra/listar",
+                            success:function (dat){
+                                console.log(dat);
+                            },
+                            dataType:"json",
+                            error:function (err){
+                                console.log(err)
+                            }
+                        })*/
 
 
         });
@@ -164,7 +171,7 @@
 
 
         })
-
+/*
         $("#btnAdicinarDteProducto").click(function (e) {
              let detalleCompra={
                  "rowidProducto":$("#idProducto").val() ,
@@ -187,12 +194,14 @@
                  data : JSON.stringify(detalleCompra),
                  dataType : 'json',
                   success: function (d) {
-                      console.log(d)
+
+                     console.log("termian la funcioin")
+
                   }
              })
 
 
-        });
+        });*/
 
 
 

@@ -12,7 +12,6 @@ import co.epvtecnologia.sistemapos.service.DetalleCompraService;
 import co.epvtecnologia.sistemapos.service.ProductoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,9 +51,10 @@ public class CompraController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid final CompraDTO compraDTO,
+    public String add(@Valid final CompraDTO compraDTO,final Model model,
                       final BindingResult bindingResult, final RedirectAttributes redirectAttributes){
         Long rowidCompra = compraService.guardar(compraDTO);
+
 
 
         return "redirect:/compras/add/producto/"+rowidCompra;
@@ -65,9 +65,16 @@ public class CompraController {
     public String addProducto(@PathVariable("rowid") Long rowid , final Model model){
         CompraDTO compraDTO = compraService.getCompraDTO(rowid);
         List<DetalleCompra> detalleCompraList = detalleCompraService.detalleCompraListByRowidCompra(compraDTO.getRowid());
+        double valorTotal = detalleCompraList.stream()
+                .mapToDouble(dte -> dte.getCantidad()*dte.getProducto().getValor())
+                .sum();
+
+        model.addAttribute("valorTotal",valorTotal);
         model.addAttribute("detalleCompras",detalleCompraList);
         model.addAttribute("compra",compraDTO);
-
+        DataDteCompraDTO dataDteCompraDTO = new DataDteCompraDTO();
+        dataDteCompraDTO.setRowidCompra(compraDTO.getRowid());
+        model.addAttribute("dataDteCompraDTO",dataDteCompraDTO);
         return "compra-producto/ingreso-pro";
     }
 
@@ -100,8 +107,7 @@ public class CompraController {
     }
 
     @PostMapping("/add/detalle-compra")
-    @ResponseBody
-    public ResponseEntity addDetalleCompra (@RequestBody DataDteCompraDTO dataDteCompraDTO){
+    public String compraAdicionarProducto (DataDteCompraDTO dataDteCompraDTO,final Model model){
         DetalleCompra detalleCompra = new DetalleCompra();
         ProductoDTO productoDTO = productoService.get(dataDteCompraDTO.getRowidProducto());
 
@@ -122,22 +128,13 @@ public class CompraController {
 
         DetalleCompra dte = detalleCompraService.guardar(detalleCompra);
 
-        return ResponseEntity.ok("Realizaep");
-    }
 
-
-    @GetMapping("/detalleCompra/{rowidcompra}")
-    @ResponseBody
-    public ResponseEntity getDetalleCompra(@PathVariable Long rowidcompra){
-
-        //Compra compra = compraService.getCompra(rowidcompra);
-
-        List<DetalleCompra> detalleCompraList = detalleCompraService.listaDetalleCompra();
-
-
-        return  ResponseEntity.ok(detalleCompraList);
+        return "redirect:/compras/add/producto/"+compra.getRowid();
 
     }
+
+
+
 
 
 
