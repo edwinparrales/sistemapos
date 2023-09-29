@@ -69,6 +69,10 @@ public class CompraController {
                 .mapToDouble(dte -> dte.getCantidad()*dte.getProducto().getValor())
                 .sum();
 
+        compraDTO.setValorTotal(valorTotal);
+
+        compraService.update(compraDTO.getRowid(),compraDTO);
+
         model.addAttribute("valorTotal",valorTotal);
         model.addAttribute("detalleCompras",detalleCompraList);
         model.addAttribute("compra",compraDTO);

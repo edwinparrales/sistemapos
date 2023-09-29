@@ -85,6 +85,10 @@
                     <label for="producto">Nombre Producto:</label>
                     <input id="producto" type="text" name="producto" readonly th:field="*{nombreProducto}"/>
                 </div>
+                <div>
+                    <label for="valorProducto">Valor Producto $:</label>
+                    <input id="valorProducto" type="number" name="valorProdcuto" readonly th:field="*{valorProducto}"/>
+                </div>
 
                 <label for="cantidad">Cantidad:</label>
                 <input type="number" name="cantidad" id="cantidad" th:min="1" th:field="*{cantidad}" required/>
@@ -155,8 +159,9 @@
 
                 success: function (data) {
 
-                    $("#idProducto").val(data.id)
-                    $("#producto").val(data.descripcion)
+                    $("#idProducto").val(data.id);
+                    $("#producto").val(data.descripcion);
+                    $("#valorProducto").val(data.valor);
 
                     console.log(data)
 

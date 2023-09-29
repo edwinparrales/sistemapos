@@ -11,6 +11,8 @@ public class DataDteCompraDTO {
 
     private String nombreProducto;
 
+    private Double valorProducto;
+
 
     public Long getRowidProducto() {
         return rowidProducto;
@@ -50,5 +52,13 @@ public class DataDteCompraDTO {
 
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
+    }
+
+    public Double getValorProducto() {
+        return valorProducto;
+    }
+
+    public void setValorProducto(Double valorProducto) {
+        this.valorProducto = valorProducto;
     }
 }

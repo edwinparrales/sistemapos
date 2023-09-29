@@ -6,6 +6,7 @@ import co.epvtecnologia.sistemapos.domain.Producto;
 import co.epvtecnologia.sistemapos.model.CompraDTO;
 import co.epvtecnologia.sistemapos.model.ProductoDTO;
 import co.epvtecnologia.sistemapos.repos.CompraRepository;
+import co.epvtecnologia.sistemapos.util.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,14 @@ public class CompraService {
         return  compraRepository.save(compra).getRowid();
     }
 
+
+    public void update(final Long id, final CompraDTO compraDTO) {
+        final Compra compra = compraRepository.findById(id)
+                .orElseThrow(NotFoundException::new);
+        mapToCompraEntity(compra, compraDTO);
+        compraRepository.save(compra);
+    }
+
      public CompraDTO  getCompraDTO(Long rowid){
         Compra compra = compraRepository.findById(rowid).get();
 
@@ -67,10 +76,11 @@ public class CompraService {
         compraEntity.setCodigoFactuar(compraDTO.getCodigoFactuar());
         compraEntity.setFechaRegistro(compraDTO.getFechaRegistro());
         compraEntity.setNitProveedor(compraDTO.getNitProveedor());
+        compraEntity.setValorTotal(compraDTO.getValorTotal());
         compraEntity.setRazonSocialProveedor(compraDTO.getRazonSocialProveedor());
 
 
-        compraEntity.setValorTotal(compraDTO.getValorTotal());
+
         return compraEntity;
     }
 
