@@ -78,7 +78,7 @@ public class CategoriaService {
     public String getReferencedWarning(final Long id) {
         final Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
-        final Producto idCategoriaProducto = productoRepository.findFirstByIdCategoria(categoria);
+        final Producto idCategoriaProducto = productoRepository.findFirstByIdCategoria(categoria.getId());
         if (idCategoriaProducto != null) {
             return WebUtils.getMessage("categoria.producto.idCategoria.referenced", idCategoriaProducto.getId());
         }

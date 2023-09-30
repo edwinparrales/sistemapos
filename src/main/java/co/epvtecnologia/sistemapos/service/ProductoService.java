@@ -1,12 +1,17 @@
 package co.epvtecnologia.sistemapos.service;
 
 import co.epvtecnologia.sistemapos.domain.Categoria;
+import co.epvtecnologia.sistemapos.domain.DetalleCompra;
 import co.epvtecnologia.sistemapos.domain.Producto;
 import co.epvtecnologia.sistemapos.model.ProductoDTO;
 import co.epvtecnologia.sistemapos.repos.CategoriaRepository;
+import co.epvtecnologia.sistemapos.repos.DetalleCompraRepository;
 import co.epvtecnologia.sistemapos.repos.ProductoRepository;
 import co.epvtecnologia.sistemapos.util.NotFoundException;
 import java.util.List;
+
+import co.epvtecnologia.sistemapos.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +21,8 @@ public class ProductoService {
 
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
+    @Autowired
+    private DetalleCompraRepository detalleCompraRepository;
 
     public ProductoService(final ProductoRepository productoRepository,
             final CategoriaRepository categoriaRepository) {
@@ -87,6 +94,22 @@ public class ProductoService {
     public boolean codigoInternoExists(final String codigoInterno) {
         return productoRepository.existsByCodigoInternoIgnoreCase(codigoInterno);
     }
+
+    //Verificar referencias del producto
+
+    public String referenciaConDetalleCompra(Long idProducto){
+
+        final Producto producto = detalleCompraRepository.findFirstByIdProducto(idProducto).getProducto();
+        if (producto != null) {
+            return WebUtils.getMessage("El producto no se puede eliminar", producto.getId());
+        }
+        return null;
+
+
+
+    }
+
+   //Referencias con DetalleFactura
 
     public  ProductoDTO findByCodigoBarras(String codBarras){
 

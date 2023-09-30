@@ -122,8 +122,19 @@ public class ProductoController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable final Long id, final RedirectAttributes redirectAttributes) {
-        productoService.delete(id);
-        redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("producto.delete.success"));
+
+        final String referencedWarning = productoService.referenciaConDetalleCompra(id);
+        if (referencedWarning != null) {
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_ERROR, referencedWarning);
+        } else {
+
+            productoService.delete(id);
+            redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("producto.delete.success"));
+        }
+
+
+
+
         return "redirect:/productos";
     }
 

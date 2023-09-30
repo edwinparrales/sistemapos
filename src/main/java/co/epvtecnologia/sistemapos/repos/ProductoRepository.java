@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-    Producto findFirstByIdCategoria(Categoria categoria);
+    Producto findFirstByIdCategoria(Long idCategoria);
 
     boolean existsByCodigoBarrasIgnoreCase(String codigoBarras);
 
