@@ -14,7 +14,7 @@
 
     <div class="d-flex flex-row m-2">
 
-        <div class="">
+        <div class=" d-flex ">
 
             <div>
                 <label for="fecha">Fecha</label>
@@ -32,7 +32,7 @@
             <div>
 
                 <label for="nombreProveedor">Nombre del proveedor:</label>
-                <input type="text" name="nombreProveedor" id="nombreProveedor" th:value="${compra.nitProveedor}">
+                <input type="text" name="nombreProveedor" id="nombreProveedor" th:value="${compra.razonSocialProveedor}">
 
             </div>
 
@@ -64,7 +64,7 @@
     </div>
     <hr>
 
-    <div class="d-flex flex-row gap-md-5 m-2">
+    <div>
 
           <form th:action="@{/compras/add/detalle-compra}" th:object="${dataDteCompraDTO}" th:method="post">
               <div>
@@ -72,8 +72,9 @@
                   <input type="number" name="rowidCompra" id="rowidCompra" th:value="${compra.rowid}" readonly th:field="*{rowidCompra}" required>
 
               </div>
+              <hr>
 
-            <div class="d-flex flex-row m-2">
+            <div class="d-flex flex-row">
 
 
 
@@ -89,10 +90,15 @@
                     <label for="valorProducto">Valor Producto $:</label>
                     <input id="valorProducto" type="number" name="valorProdcuto" readonly th:field="*{valorProducto}"/>
                 </div>
+                <div>
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" name="cantidad" id="cantidad" th:min="1" th:field="*{cantidad}" required/>
+                </div>
+                 <div>
+                     <label for="btnAdicinarDteProducto"></label>
+                     <button class="btn btn-info" type="submit" id="btnAdicinarDteProducto">Adicionar+</button>
+                 </div>
 
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" name="cantidad" id="cantidad" th:min="1" th:field="*{cantidad}" required/>
-                <button class="btn btn-success" type="submit" id="btnAdicinarDteProducto">Adicionar+</button>
             </div>
           </form>
 
@@ -109,6 +115,7 @@
                 <td>Cantidad</td>
                 <td>Valor unidad</td>
                 <td>Valor Total</td>
+                <td>Operaciones</td>
             </tr>
             <tbody>
             <tr th:each="detalleCompra:${detalleCompras}">
@@ -118,12 +125,19 @@
                 <td th:text="${detalleCompra.cantidad}">1</td>
                 <td th:text="${detalleCompra.producto.valor}"></td>
                 <td th:text="${detalleCompra.cantidad}*${detalleCompra.producto.valor}"></td>
+                <td>
+                    <a th:href="@{/compras/eliminarDteCompra/{id}(id=${detalleCompra.rowid})}" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
             </tr>
 
             </tbody>
         </table>
-        <label for="valorTotal">ValorTotal:</label>
-          <input id="valorTotal"  name="valorTotal" class="bg-danger" type="number" th:value="${valorTotal}" readonly/>
+        <div>
+            <label for="valorTotal">ValorTotal:</label>
+            <input id="valorTotal"  name="valorTotal" class="text-bg-dark" type="number" th:value="${valorTotal}" readonly/>
+
+        </div>
+
     </div>
 
     <script th:inline="javascript" type="application/javascript">

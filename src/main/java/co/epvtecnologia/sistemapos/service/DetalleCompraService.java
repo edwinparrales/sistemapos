@@ -31,5 +31,13 @@ public class DetalleCompraService {
         return detalleCompraRepository.findByIdCompra(rowidCompra);
    }
 
+   public void delete(Long id){
+        detalleCompraRepository.deleteById(id);
+   }
+
+   public DetalleCompra get(Long id){
+        return  detalleCompraRepository.findById(id).get();
+   }
+
 
 }
