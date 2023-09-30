@@ -18,11 +18,27 @@
                 <div th:replace="~{fragments/forms::inputRow(object='producto', field='codigoInterno')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='producto', field='descripcion')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='producto', field='valor')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='producto', field='cantidad')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='producto', field='cantidad',type='number')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='producto', field='urlImagen')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='producto', field='idCategoria', type='select')}" />
                 <input type="submit" th:value="#{producto.add.headline}" class="btn btn-primary mt-4" />
             </form>
+
+            <script th:inline="javascript" type="application/javascript">
+
+                $(document).ready(function (e){
+                   //se modifica el campo cantidad para que sea un valor prederteminado a 0.
+                    let cantidad = $("#cantidad").val("0");
+                    cantidad.attr("readonly","readonly");
+
+
+                })
+
+
+
+            </script>
         </div>
+
+
     </body>
 </html>
