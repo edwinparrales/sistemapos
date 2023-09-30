@@ -47,8 +47,8 @@
     <div class="d-flex flex-row gap-md-5 m-2">
 
         <form action="" method="get">
-            <label for="codigo">Codigo:</label>
-            <input type="text" name="codigo" id="codigo">
+            <label for="codigo">Codigo interno:</label>
+            <input type="text" name="codigo" id="codigo" required>
             <button type="button" id="btnBuscarCodigo">Buscar</button>
         </form>
 
@@ -166,6 +166,10 @@
         $("#btnBuscarCodigo").click(function (e) {
             let url = "/compras/buscarProductoCodInterno/"
             let codigo = $("#codigo").val();
+            if(codigo === null || codigo===""){
+                alert("El codigo del producto no puede ser vacio");
+                return;
+            }
 
             $.ajax({
                 type: "GET",
@@ -185,6 +189,7 @@
                     console.log(e)
                     $("#idProducto").val("")
                     $("#producto").val("")
+                    alert("El producto no existe");
                 }
             });
 
